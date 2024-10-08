@@ -34,6 +34,37 @@ Problem badawczy koncentruje się na ocenie skuteczności algorytmów uczenia ma
    - **Tworzenie modelu**: Definiowanie architektury modelu CNN (Convolutional Neural Network) do klasyfikacji obrazów na podstawie metadanych i obrazów.
    - **Wizualizacja wyników**: Wyświetlanie wyników klasyfikacji oraz wizualizacja skuteczności modelu.
 
+## Ocena Skuteczności Modelu
+
+Ostateczny model oparty na architekturze ResNet50 został oceniony na zbiorze testowym, obejmującym 1952 obrazy dermatoskopowe. Poniżej przedstawiono kluczowe miary efektywności modelu:
+
+- **Dokładność (accuracy)**: 82%
+- **Średnia ważona precyzja**: 82%
+- **Średnia ważona czułość (recall)**: 82%
+- **Średnia ważona miara F1**: 81%
+
+Model osiągnął różne wyniki w zależności od klasy zmiany skórnej:
+
+| Klasa                                          | Precyzja | Czułość  | F1-score | Liczba próbek |
+|------------------------------------------------|----------|----------|----------|--------------|
+| Znamię melanocytowe                            | 0.71     | 0.39     | 0.50     | 220          |
+| Czerniak                                       | 0.56     | 0.75     | 0.64     | 102          |
+| Łagodne zmiany przypominające keratozę         | 0.73     | 0.33     | 0.46     | 66           |
+| Rak podstawnokomórkowy                         | 0.79     | 0.48     | 0.59     | 23           |
+| Rogowacenie słoneczne i rak śródnabłonkowy     | 0.62     | 0.86     | 0.72     | 28           |
+| Zmiany naczyniowe                              | 0.90     | 0.94     | 0.92     | 1298         |
+| Włókniak twardy                                | 0.60     | 0.71     | 0.65     | 215          |
+
+Najlepsze wyniki model osiągnął dla **zmian naczyniowych**, gdzie precyzja wyniosła 0.90, a czułość 0.94. Dla innych klas, takich jak **czerniak**, model wykazywał dobrą czułość (0.75), co oznacza, że skutecznie wykrywał prawdziwie pozytywne przypadki, jednak miał trudności z unikaniem fałszywych pozytywów (precyzja 0.56).
+
+Model miał najwięcej trudności z klasyfikacją **znamion melanocytowych** oraz **łagodnych zmian przypominających keratozę**, co mogło być spowodowane niewielką liczbą próbek w tych klasach oraz ich podobieństwem do innych zmian skórnych.
+
+## Wnioski i ograniczenia
+
+- Model osiągnął ogólną dokładność 82%, co jest obiecującym wynikiem w klasyfikacji wieloklasowej zmian skórnych.
+- Nierównomierność liczby przykładów w klasach (np. duża liczba przypadków zmian naczyniowych) wpłynęła na zdolność modelu do skutecznej klasyfikacji rzadziej występujących przypadków, takich jak **rak podstawnokomórkowy** czy **rogowacenie słoneczne**.
+- Pomimo zastosowania technik regularyzacji, takich jak **Dropout**, oraz wstępnie wytrenowanych wag z **ImageNet**, model nadal wykazywał pewne trudności w klasyfikacji bardziej skomplikowanych i rzadszych przypadków.
+ 
 ## Źródło danych
 Dane pochodzą z zestawu [HAM10000](https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/DBW86T), który zawiera metadane dotyczące zmian skórnych oraz odpowiadające im obrazy.
 
